@@ -504,13 +504,20 @@ module GoogleDrive
         fields: '*',
         supports_team_drives: true
       }
+      
+      file_metadata = { name: title }
+
+      if params[:file_id].presence
+        file_metadata[:id] = params[:file_id]
+        params.delete :file_id
+      end
+      
       for k, v in params
         if ![:convert, :convert_mime_type, :parents].include?(k)
           api_params[k] = v
         end
       end
 
-      file_metadata = { name: title }
       content_type = api_params[:content_type]
       if params[:convert_mime_type]
         file_metadata[:mime_type] = params[:convert_mime_type]
