@@ -187,6 +187,11 @@ module GoogleDrive
       end
       nil
     end
+    
+    def restore
+      @session.drive.update_file(id, { trashed: false }, {})
+      nil
+    end
 
     # Renames title of the file.
     def rename(title)
