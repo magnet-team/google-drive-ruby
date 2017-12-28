@@ -517,6 +517,11 @@ module GoogleDrive
         end
       end
       
+      if params[:custom_properties].presence && params[:custom_properties].is_a?(Hash)
+        file_metadata[:appProperties] = params[:custom_properties]
+        params.delete :custom_properties
+      end
+      
       for k, v in params
         if ![:convert, :convert_mime_type, :parents].include?(k)
           api_params[k] = v
