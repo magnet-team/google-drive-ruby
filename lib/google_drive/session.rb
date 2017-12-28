@@ -507,9 +507,14 @@ module GoogleDrive
       
       file_metadata = { name: title }
 
-      if params[:file_id].presence
-        file_metadata[:id] = params[:file_id]
-        params.delete :file_id
+      # id: pre-generated id 
+      # description: description field for files
+     
+      [:id, :description].each do |field|
+        if params[field].presence
+          file_metadata[field] = params[field]
+          params.delete field
+        end
       end
       
       for k, v in params
