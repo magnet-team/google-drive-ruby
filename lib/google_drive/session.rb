@@ -522,6 +522,8 @@ module GoogleDrive
         params.delete :custom_properties
       end
       
+      puts "#{params}"
+      
       for k, v in params
         if ![:convert, :convert_mime_type, :parents].include?(k)
           api_params[k] = v
