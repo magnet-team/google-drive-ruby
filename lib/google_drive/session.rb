@@ -507,22 +507,15 @@ module GoogleDrive
       
       file_metadata = { name: title }
 
-      # id: pre-generated id 
+      # id: pre-generated id
       # description: description field for files
-     
-      [:id, :description].each do |field|
+      # app_properties: self identifying properties - https://developers.google.com/drive/v3/web/properties
+      [:id, :description, :app_properties].each do |field|
         if params[field].presence
           file_metadata[field] = params[field]
-          params.delete field
         end
+        params.delete field
       end
-      
-      if params[:custom_properties].presence && params[:custom_properties].is_a?(Hash)
-        file_metadata[:appProperties] = params[:custom_properties]
-        params.delete :custom_properties
-      end
-      
-      puts "#{params}"
       
       for k, v in params
         if ![:convert, :convert_mime_type, :parents].include?(k)
