@@ -200,6 +200,16 @@ module GoogleDrive
     end
 
     alias_method :title=, :rename
+    
+    def update_description(description)
+      @session.drive.update_file(id, { description: description }, {})
+      nil
+    end
+    
+    def update_file_name_and_description(title, description)
+      @session.drive.update_file(id, { name: title, description: description }, {})
+      nil
+    end
 
     # Creates copy of this file with the given title.
     def copy(title)
