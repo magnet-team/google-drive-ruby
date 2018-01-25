@@ -202,7 +202,7 @@ module GoogleDrive
     alias_method :title=, :rename
 
     def update_app_properties(app_properties)
-      @session.drive.update_file(id, { appProperties: app_properties }, {})
+      @session.drive.update_file(id, { app_properties: app_properties }, {})
       nil
     end
     
